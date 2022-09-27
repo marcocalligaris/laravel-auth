@@ -2,8 +2,11 @@
 
 @section('content')
 
-<header>
+<header class="d-flex justify-content-between align-items-center">
     <h1>Elenco dei post</h1>
+    <a class="btn btn-success" href="{{ route('admin.posts.create') }} ">
+      <i class="fa-solid fa-plus mr-2"></i>Crea nuovo post
+    </a>
 </header>
     <table class="table table-striped">
         <thead>
