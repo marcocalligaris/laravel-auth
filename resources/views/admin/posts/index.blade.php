@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
 <header>
     <h1>Elenco dei post</h1>
+</header>
     <table class="table table-striped">
         <thead>
           <tr>
-            <th class="border-info"scope="col">#</th>
+            <th scope="col">#</th>
             <th>Titolo</th>
             <th>Slug</th>
             <th>Creato il</th>
@@ -22,7 +24,18 @@
                 <td>{{ $post->slug }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
-                <td></td>
+                <td class="d-flex justify-content-end">
+                  <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm mr-2" type="submit">
+                        <i class="fa-solid fa-trash mr-2"></i>Elimina
+                    </button>
+                </form>
+                  <a class="btn btn-sm btn-primary" href="{{ route('admin.posts.show', $post) }}">
+                    <i class="fa-solid fa-eye mr-2"></i>Vedi
+                  </a>
+                </td>
             </tr>
             @empty
             <tr>
@@ -34,5 +47,5 @@
             
         </tbody>
       </table>
-</header>
+
 @endsection

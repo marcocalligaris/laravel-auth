@@ -5,4 +5,5 @@
  */
 
 require('./bootstrap');
+require('./admin/delete_confirm');
 

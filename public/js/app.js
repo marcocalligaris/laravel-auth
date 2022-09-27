@@ -37288,6 +37288,24 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/delete_confirm.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/delete_confirm.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var deleteForms = document.querySelectorAll('.delete-form');
+deleteForms.forEach(function (form) {
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var hasConfirmed = window.confirm('Confermi di voler eliminare il post?');
+    if (hasConfirmed) form.submit();
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -37301,6 +37319,8 @@ module.exports = function(module) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./admin/delete_confirm */ "./resources/js/admin/delete_confirm.js");
 
 /***/ }),
 
