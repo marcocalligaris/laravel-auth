@@ -16,7 +16,7 @@ class PostSeeder extends Seeder
         Faker $faker
     )
     {
-        for($i = 0; $i < 10; $i++){
+        for($i = 0; $i < 15; $i++){
             $new_post = new Post();
             
             $new_post->title = $faker->text(30);

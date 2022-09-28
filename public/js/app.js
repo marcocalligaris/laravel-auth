@@ -37322,6 +37322,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./admin/delete_confirm */ "./resources/js/admin/delete_confirm.js");
 
+__webpack_require__(/*! ./img_preview */ "./resources/js/img_preview.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37366,6 +37368,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/img_preview.js":
+/*!*************************************!*\
+  !*** ./resources/js/img_preview.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var imageField = document.getElementById('image');
+var preview = document.getElementById('preview');
+var placeholder = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&usqp=CAU";
+imageField.addEventListener('input', function () {
+  preview.src = imageField.value || placeholder;
+});
 
 /***/ }),
 

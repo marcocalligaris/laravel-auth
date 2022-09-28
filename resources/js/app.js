@@ -6,4 +6,5 @@
 
 require('./bootstrap');
 require('./admin/delete_confirm');
+require('./img_preview');
 
