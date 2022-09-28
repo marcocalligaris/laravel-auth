@@ -15,21 +15,19 @@
         <p><u><strong>Ultima modifica: </strong></u><time>{{ $post->updated_at }}</time></p>
         
     <hr>
-    <footer class="d-flex align-items-center justify-content-between">
-        <div>
-            <a href="{{ route('admin.posts.index') }} " class="btn btn-secondary">
-                <i class="fa-solid fa-rotate-left mr-2"></i>Indietro
-            </a>
-        </div>
-        <div class="d-flex align-items-center justify-content-end">
-            <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger" type="submit">
-                    <i class="fa-solid fa-trash mr-2"></i>Elimina
-                </button>
-            </form>
-        </div>
+    <footer class="d-flex align-items-center justify-content-end">
+        <a href="{{ route('admin.posts.index') }} " class="btn btn-secondary mr-2">
+            <i class="fa-solid fa-rotate-left mr-2"></i>Indietro
+        </a>
+        <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form">
+             @csrf
+            @method('DELETE')
+            <button class="btn btn-danger mr-2" type="submit">
+                <i class="fa-solid fa-trash mr-2"></i>Elimina
+            </button>
+        </form>
+        <a class="text-white btn btn-info mr-2" href="{{ route('admin.posts.edit', $post) }}">
+            <i class="fa-solid fa-pencil mr-2"></i>Modifica</a>
     </footer>
 
 @endsection

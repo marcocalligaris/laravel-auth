@@ -28,6 +28,9 @@
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
                 <td class="d-flex justify-content-end">
+                  <a class="btn btn-sm btn-info mr-2 text-white" href="{{ route('admin.posts.edit', $post) }}">
+                    <i class="fa-solid fa-pencil mr-2"></i>Modifica
+                  </a>
                   <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form">
                     @csrf
                     @method('DELETE')
