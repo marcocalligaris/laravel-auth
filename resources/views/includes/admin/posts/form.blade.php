@@ -7,10 +7,21 @@
 @endif
     @csrf
     <div class="row">
-        <div class="col-12">
+        <div class="col-9">
             <div class="form-group">
                 <label for="title">Titolo</label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title', $post->title) }}" required maxlength="50">
+              </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select class="form-control" id="category_id" name="category_id">
+                    <option value="">Seleziona categoria</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->label }}</option>
+                    @endforeach
+                </select>
               </div>
         </div>
         <div class="col-12">
@@ -30,8 +41,8 @@
         </div>
     </div>
     <hr>
-    <footer class="d-flex justify-content-between">
-        <a class="btn btn-secondary" href="{{ route('admin.posts.index') }}">
+    <footer class="d-flex justify-content-end">
+        <a class="btn btn-secondary mr-2" href="{{ route('admin.posts.index') }}">
             <i class="fa-solid fa-rotate-left mr-2"></i>Indietro
         </a>
         <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk mr-2"></i> Salva</button>
