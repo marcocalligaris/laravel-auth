@@ -82,7 +82,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -94,14 +95,19 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'category_id' => 'nullable|exists:categories,id'
+        ], [
+            'category_id.exists' => 'Nessuna categoria'
+        ]);
+
         $data = $request->all();
 
         $data['slug'] = Str::slug($data['title'], '-');
 
         $post->update($data);
 
-
-        return redirect()->route('admin.posts.show', compact('post'))
+        return redirect()->route('admin.posts.show', compact('post', 'categories'))
             ->with('message', 'Post modificato con successo')
             ->with('type', 'success');
     }
