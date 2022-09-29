@@ -12,6 +12,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th>Autore</th>
             <th>Titolo</th>
             <th>Slug</th>
             <th>Categoria</th>
@@ -24,6 +25,11 @@
             @forelse($posts as $post)
             <tr>
                 <th scope="row">{{ $post->id }}</th>
+                <td>
+                  @if($post->user)
+                  {{ $post->user->name }}</td>
+                  @else Generic
+                  @endif
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
                 <td> @if ($post->category)  {{ $post->category->label }} @else  Generic @endif </td>
@@ -47,7 +53,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7">
+                <td colspan="8">
                     <h3 class="text-center">Nessun post</h3>
                 </td>
             </tr>

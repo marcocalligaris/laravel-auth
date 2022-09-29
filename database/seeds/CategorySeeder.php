@@ -17,7 +17,6 @@ class CategorySeeder extends Seeder
         foreach($categories as $category){
             $new_category = new Category();
             $new_category->label = $category['label'];
-            $new_Category->color = $category['color'];
             $new_category->save();
         }
     }

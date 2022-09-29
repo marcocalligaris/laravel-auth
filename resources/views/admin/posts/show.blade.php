@@ -11,6 +11,7 @@
             <p>{{ $post->content }}</p>
     </div>
         <p><u><strong>Categoria:</strong></u> @if ($post->category)  {{ $post->category->label }} @else  Generic @endif </p>
+        <p><u><strong>Autore:</strong></u> @if ($post->user)  {{ $post->user->name }} @else  Generic @endif </p>
         <p><u><strong>Creato il:</strong></u><time> {{ $post->created_at }}</time></p>
         <p><u><strong>Ultima modifica:</strong></u><time> {{ $post->updated_at }}</time></p>
         
