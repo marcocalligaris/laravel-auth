@@ -104,6 +104,7 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
+        $categories = Category::all();
 
         $data['slug'] = Str::slug($data['title'], '-');
 
