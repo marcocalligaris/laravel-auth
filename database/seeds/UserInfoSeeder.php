@@ -2,8 +2,8 @@
 
 use App\User;
 use App\Models\UserInfo;
-use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class UserInfoSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class UserInfoSeeder extends Seeder
     {
         $users = User::all();
 
-        foreach($users as $user){
+        foreach($users as $user) {
             $user_info = new UserInfo();
             $user_info->user_id = $user->id;
             $user_info->first_name = $faker->firstName();
@@ -24,7 +24,7 @@ class UserInfoSeeder extends Seeder
             $user_info->address = $faker->address();
             $user_info->phone = $faker->phoneNumber();
             $user_info->birth_date = $faker->year();
-            $user->save();
+            $user_info->save();
         }
     }
 }
