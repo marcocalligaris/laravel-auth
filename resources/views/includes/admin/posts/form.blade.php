@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="title">Titolo</label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title', $post->title) }}" required maxlength="50">
-              </div>
+            </div>
         </div>
         <div class="col-3">
             <div class="form-group">
@@ -25,6 +25,26 @@
                 </select>
               </div>
         </div>
+        @if(count($tags))
+        <div class="col-12 mb-3">
+            <fieldset class="d-flex">
+                <h5><strong>Tags:</strong></h5>
+                @foreach($tags as $tag)
+                <div class="ml-4 form-check">
+                    <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="{{ $tag->label }}" 
+                    value="{{ $tag->id }}" 
+                    name="tags[]"
+                    @if(in_array($tag->id, old('tags', $tags_ids_array ?? []))) checked @endif
+                    >
+                    <label class="form-check-label" for="{{ $tag->label }}">{{ $tag->label }}</label>
+                </div>
+                @endforeach
+            </fieldset>
+        </div>
+        @endif
         <div class="col-12">
             <div class="form-group">
                 <label for="content">Testo</label>

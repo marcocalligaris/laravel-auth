@@ -14,7 +14,13 @@
         <p><u><strong>Autore:</strong></u> @if ($post->user)  {{ $post->user->name }} @else  Generic @endif </p>
         <p><u><strong>Creato il:</strong></u><time> {{ $post->created_at }}</time></p>
         <p><u><strong>Ultima modifica:</strong></u><time> {{ $post->updated_at }}</time></p>
-        
+        <p><u><strong>Tags:</strong></u>
+            @forelse($post->tags as $tag) 
+            <span>'{{ $tag->label }}' </span>
+            @empty - 
+            @endforelse
+        </p>
+
     <hr>
     <footer class="d-flex align-items-center justify-content-end">
         <a href="{{ route('admin.posts.index') }} " class="btn btn-secondary mr-2">
@@ -32,3 +38,4 @@
     </footer>
 
 @endsection
+
