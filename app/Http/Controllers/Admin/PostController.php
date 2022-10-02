@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view('admin.posts.create', compact('post', 'categories'));
+        $tags = Tag::select('id', 'label',)->get();
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -44,9 +46,11 @@ class PostController extends Controller
     {
         $request->validate([
             'image' => 'url|nullable',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ], [
-            'category_id.exists' => 'Nessuna categoria '
+            'category_id.exists' => 'Nessuna categoria',
+            'tags.exists' => 'Tag non valido',
         ]);
 
         $data = $request->all();
@@ -59,6 +63,11 @@ class PostController extends Controller
 
         $post->user_id = Auth::id();
         $post->save();
+
+        // Operazione da fare DOPO aver salvato
+        if(array_key_exists('tags', $data)) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return redirect()->route('admin.posts.store', $post)
             ->with('message', 'Post creato con successo')
@@ -84,8 +93,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags = Tag::select('id', 'label',)->get();
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags_ids_array = $post->tags->pluck('id')->toArray();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tags_ids_array'));
     }
 
     /**
@@ -98,15 +109,26 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ], [
-            'category_id.exists' => 'Nessuna categoria'
+            'category_id.exists' => 'Nessuna categoria',
+            'tags.exists' => 'Tag non valido',
         ]);
 
         $data = $request->all();
         $categories = Category::all();
+<<<<<<< HEAD
 
+=======
+>>>>>>> many-to-many
         $data['slug'] = Str::slug($data['title'], '-');
+        
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         $post->update($data);
 
@@ -123,6 +145,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if(count($post->tags)) $post->tags->detach();
         $post->delete();
         return redirect()->route('admin.posts.index')
             ->with('message', 'Post eliminato con successo')

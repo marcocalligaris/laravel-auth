@@ -16,6 +16,7 @@
             <th>Titolo</th>
             <th>Slug</th>
             <th>Categoria</th>
+            <th>Tags</th>
             <th>Creato il</th>
             <th>Modificato il</th>
             <th>Azioni</th>
@@ -33,6 +34,15 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
                 <td> @if ($post->category)  {{ $post->category->label }} @else  Generic @endif </td>
+                <td>  
+                  <ul class="list-unstyled">
+                    @forelse($post->tags as $tag)
+                    <li>
+                      {{ $tag->label }}
+                      @empty - 
+                    </li>
+                  </ul> 
+                  @endforelse </td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
                 <td class="d-flex justify-content-end">
@@ -53,7 +63,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="8">
+                <td colspan="9">
                     <h3 class="text-center">Nessun post</h3>
                 </td>
             </tr>
