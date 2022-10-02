@@ -118,10 +118,7 @@ class PostController extends Controller
 
         $data = $request->all();
         $categories = Category::all();
-<<<<<<< HEAD
 
-=======
->>>>>>> many-to-many
         $data['slug'] = Str::slug($data['title'], '-');
         
         if(array_key_exists('tags', $data)){
