@@ -8,7 +8,8 @@
       <i class="fa-solid fa-plus mr-2"></i>Crea nuovo post
     </a>
 </header>
-    <table class="table table-striped">
+<section>
+  <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -70,6 +71,21 @@
             @endforelse
             
         </tbody>
-      </table>
-
-@endsection
+  </table>
+</section>
+<section class="mt-5" id="posts-by-cat">
+  <h3 class="mb-3"><strong>Post ordinati per categoria</strong></h3>
+  <div class="row">
+    @foreach ($categories as $category)
+    <div class="col-2">
+      <h4>{{ $category->label }} ({{ count($category->posts) }})</h4>
+      @forelse($category->posts as $post)
+      <p><a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a></p>
+      @empty
+        Nessun post da mostrare
+      @endforelse
+    </div>
+    @endforeach
+  </div>
+</section>
+      @endsection

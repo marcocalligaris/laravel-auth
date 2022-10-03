@@ -20,7 +20,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->get();
-        return view('admin.posts.index', compact('posts'));
+        $categories = Category::all();
+        return view('admin.posts.index', compact('posts', 'categories'));
+
     }
 
     /**
@@ -146,6 +148,6 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')
             ->with('message', 'Post eliminato con successo')
-            ->with('type', 'success');
+            ->with('type', 'danger');
     }
 }

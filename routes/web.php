@@ -20,6 +20,7 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
 
     Route::get('/users', ('UserController@index'))->name('users.index');
     Route::resource('posts', 'PostController');
+    Route::resource('categories', 'CategoryController');
     
     Route::get('/{any}', function () {
         abort('404');
